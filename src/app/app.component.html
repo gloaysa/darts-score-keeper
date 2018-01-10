@@ -2,8 +2,10 @@
 
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Welcome to {{ title }}!</span>
-    <button mat-button>My Button</button>
+    <h1>Welcome to {{ title }}!</h1>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <button mat-button [routerLink]="['./score']" >Score</button>
   </mat-toolbar-row>
 </mat-toolbar>
 

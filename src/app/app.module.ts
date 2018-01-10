@@ -4,10 +4,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
 
-
-
 import { AppComponent } from './app.component';
 import { ScoreTrackerComponent } from "./score-tracker/score-tracker.component";
+import { HttpModule } from '@angular/http';
+import { ScoreTableComponent } from './score-tracker/score-table/score-table.component';
 
 const appRoutes: Routes = [
   { path: "score", component: ScoreTrackerComponent },
@@ -27,15 +27,16 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [AppComponent, ScoreTrackerComponent],
+  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

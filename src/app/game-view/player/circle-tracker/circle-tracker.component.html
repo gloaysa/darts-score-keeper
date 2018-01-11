@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutGap="5px" class="player-column" *ngFor="let circle of circles; let i = index">
+  <div fxFlex>
+    <ng-container *ngIf="circle.number < 21; else icon">
+      <button class="mat-fab" (click)="addPoints(i)" [ngClass]="selectState(i)">{{ circle.number }}</button>
+    </ng-container>
+    <ng-template #icon><button class="mat-fab" (click)="addPoints(i)" [ngClass]="selectState(i)"><i class="material-icons">track_changes</i></button></ng-template>
+  </div>
+</div>
+

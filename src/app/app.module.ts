@@ -8,26 +8,16 @@ import { AppComponent } from './app.component';
 import { ScoreTrackerComponent } from "./score-tracker/score-tracker.component";
 import { HttpModule } from '@angular/http';
 import { ScoreTableComponent } from './score-tracker/score-table/score-table.component';
+import { GameViewComponent } from './game-view/game-view.component';
 
 const appRoutes: Routes = [
   { path: "score", component: ScoreTrackerComponent },
-  //{ path: "hero/:id", component: HeroDetailComponent },
-  //{
-  //  path: "heroes",
-  //  component: HeroListComponent,
-  //  data: { title: "Heroes List" }
-  //},
-  //{
-  //  path: "",
-  //  redirectTo: "/heroes",
-  //  pathMatch: "full"
-  //},
-  //{ path: "**", component: PageNotFoundComponent }
+  { path: "play", component: GameViewComponent }
 ];
 
 
 @NgModule({
-  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent],
+  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent, GameViewComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,

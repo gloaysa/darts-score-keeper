@@ -6,7 +6,12 @@
   </mat-toolbar-row>
   <mat-toolbar-row>
     <button mat-button [routerLink]="['./score']" >Score</button>
+    <button mat-button [routerLink]="['./play']" >Play</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-card>
+  <router-outlet></router-outlet>
+  <mat-card-footer>Hi, I'm the footer</mat-card-footer>
+</mat-card>
+

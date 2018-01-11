@@ -10,7 +10,8 @@ import { ScoreTrackerComponent } from "./score-tracker/score-tracker.component";
 import { HttpModule } from '@angular/http';
 import { ScoreTableComponent } from './score-tracker/score-table/score-table.component';
 import { GameViewComponent } from './game-view/game-view.component';
-import { CircleTrackerComponent } from './game-view/circle-tracker/circle-tracker.component';
+import { CircleTrackerComponent } from "./game-view/player/circle-tracker/circle-tracker.component";
+import { PlayerComponent } from './game-view/player/player.component';
 
 const appRoutes: Routes = [
   { path: "score", component: ScoreTrackerComponent },
@@ -19,7 +20,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent, GameViewComponent, CircleTrackerComponent],
+  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent, GameViewComponent, CircleTrackerComponent, PlayerComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,

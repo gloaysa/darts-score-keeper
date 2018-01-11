@@ -6,5 +6,7 @@ import { Component } from "@angular/core";
   styleUrls: ["./game-view.component.css"]
 })
 export class GameViewComponent {
+  player1: string = "Guillermo";
+  player2: string = "Nacho";
 
 }

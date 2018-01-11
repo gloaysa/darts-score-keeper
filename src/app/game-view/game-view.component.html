@@ -1,9 +1,20 @@
-<mat-card-title>Play</mat-card-title>
 <mat-card-content>
-  <div fxLayout="row" class="container board"></div>
+  <div fxLayout="row" class="score">
+      <div fxFlex>Score</div>
+      <div fxFlex>Score</div>
+  </div>
 
-  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" class="container board">
-    <div fxFlex="50%">Player 1</div>
-    <div fxFlex="50%">Player 2</div>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="3px" class="counter">
+
+    <div fxFlex="50%">
+      <h1>{{player1}}</h1>
+
+        <app-circle-tracker></app-circle-tracker>
+    </div>
+    <div fxFlex="50%">
+
+      <h1>{{player2}}</h1>
+        <app-circle-tracker></app-circle-tracker>
+    </div>
   </div>
 </mat-card-content>

@@ -1,0 +1,19 @@
+<mat-card-content>
+  <div fxLayout="row" class="score">
+      <div fxFlex>Score</div>
+      <div fxFlex>Score</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="3px" class="counter">
+
+    <div fxFlex="50%">
+      <h1>{{player1}}</h1>
+      <app-player></app-player>
+    </div>
+
+    <div fxFlex="50%">
+      <h1>{{player2}}</h1>
+      <app-player></app-player>
+    </div>
+  </div>
+</mat-card-content>

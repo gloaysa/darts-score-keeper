@@ -1,0 +1,9 @@
+.material-icons {
+  font-size: 18px;
+}
+.material-icons.yellow { color: #ffff00; }
+
+mat-progress-spinner {
+  stroke: #4b77be;
+  margin: auto;
+}

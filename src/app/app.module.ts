@@ -3,38 +3,34 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
-
-
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
+import { ScoreTrackerComponent } from "./score-tracker/score-tracker.component";
+import { HttpModule } from '@angular/http';
+import { ScoreTableComponent } from './score-tracker/score-table/score-table.component';
+import { GameViewComponent } from './game-view/game-view.component';
+import { CircleTrackerComponent } from "./game-view/player/circle-tracker/circle-tracker.component";
+import { PlayerComponent } from './game-view/player/player.component';
 
 const appRoutes: Routes = [
-  /* { path: "crisis-center", component: CrisisListComponent },
-  { path: "hero/:id", component: HeroDetailComponent },
-  {
-    path: "heroes",
-    component: HeroListComponent,
-    data: { title: "Heroes List" }
-  },
-  {
-    path: "",
-    redirectTo: "/heroes",
-    pathMatch: "full"
-  },
-  { path: "**", component: PageNotFoundComponent } */
+  { path: "score", component: ScoreTrackerComponent },
+  { path: "play", component: GameViewComponent }
 ];
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent, GameViewComponent, CircleTrackerComponent, PlayerComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

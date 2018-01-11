@@ -3,7 +3,12 @@
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.position != 1; else elseTemplate">
+        {{ element.position }}
+      </ng-container>
+      <ng-template #elseTemplate> <i class="material-icons yellow">stars</i> </ng-template>
+    </mat-cell>
   </ng-container>
 
   <!-- Player Column -->

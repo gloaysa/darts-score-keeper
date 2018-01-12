@@ -1,19 +1,11 @@
 <mat-card-content>
-  <div fxLayout="row" class="score">
-      <div fxFlex>Score</div>
-      <div fxFlex>Score</div>
-  </div>
-
-  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="3px" class="counter">
-
-    <div fxFlex="50%">
-      <h1>{{player1}}</h1>
-      <app-player></app-player>
+  <mat-button-toggle-group>
+    <div *ngFor="let data of playersData">
+      <mat-button-toggle>{{ data.player }} </mat-button-toggle>
     </div>
+  </mat-button-toggle-group>
 
-    <div fxFlex="50%">
-      <h1>{{player2}}</h1>
-      <app-player></app-player>
-    </div>
-  </div>
 </mat-card-content>
+
+<button mat-button [routerLink]="['./select-player']">Play</button>
+<router-outlet></router-outlet>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleDriveProvider} from './spreadsheet.module';
+import { GoogleDriveProvider} from '../spreadsheet.module';
 
 @Component({
   selector: "app-score-tracker",

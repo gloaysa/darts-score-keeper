@@ -12,6 +12,7 @@ import { GameViewComponent } from './game-view/game-view.component';
 import { CircleTrackerComponent } from "./game-view/circle-tracker/circle-tracker.component";
 import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
+import { GoogleDriveProvider } from './spreadsheet.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
     ScoreTableComponent,
     GameViewComponent,
     CircleTrackerComponent,
-    PlayerComponent],
+    PlayerComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     FlexLayoutModule,
     HttpModule
   ],
-  providers: [],
+  providers: [GoogleDriveProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

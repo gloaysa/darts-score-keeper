@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -12,21 +11,19 @@ import { ScoreTableComponent } from './score-tracker/score-table/score-table.com
 import { GameViewComponent } from './game-view/game-view.component';
 import { CircleTrackerComponent } from "./game-view/player/circle-tracker/circle-tracker.component";
 import { PlayerComponent } from './game-view/player/player.component';
-
-const appRoutes: Routes = [
-  { path: "score", component: ScoreTrackerComponent },
-  { path: "play", component: GameViewComponent }
-];
-
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, ScoreTrackerComponent, ScoreTableComponent, GameViewComponent, CircleTrackerComponent, PlayerComponent],
+  declarations: [
+    AppComponent,
+    ScoreTrackerComponent,
+    ScoreTableComponent,
+    GameViewComponent,
+    CircleTrackerComponent,
+    PlayerComponent],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
-    ),
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,

@@ -9,7 +9,7 @@ import { ScoreTrackerComponent } from "./score-tracker/score-tracker.component";
 import { HttpModule } from '@angular/http';
 import { ScoreTableComponent } from './score-tracker/score-table/score-table.component';
 import { GameViewComponent } from './game-view/game-view.component';
-import { CircleTrackerComponent } from "./game-view/player/circle-tracker/circle-tracker.component";
+import { CircleTrackerComponent } from "./game-view/circle-tracker/circle-tracker.component";
 import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
 

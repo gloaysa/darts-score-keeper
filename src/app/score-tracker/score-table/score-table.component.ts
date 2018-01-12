@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { GoogleDriveProvider } from "../spreadsheet.module";
+import { GoogleDriveProvider } from "../../spreadsheet.module";
 
 import { MatTableDataSource, MatSort } from "@angular/material";
 

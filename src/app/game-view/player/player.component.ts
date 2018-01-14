@@ -42,7 +42,6 @@ export class PlayerComponent implements OnInit {
         player.playing = false;
       }
     });
-    console.log(this.playersData);
   }
 
   constructor() { }

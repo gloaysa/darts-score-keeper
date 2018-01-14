@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { playersData } from './models/playersData';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ export class GoogleDriveProvider {
             const pos = index + 1;
             const name = entry[0];
             const points = entry[1];
-            obj = {position: pos, player: name, points: points, winner: false, playing: false};
+            obj = new playersData(pos, name, points);
             returnArray.push( obj );
             });
           }

@@ -1,16 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { GoogleDriveProvider } from "../spreadsheet.module";
+import { PlayersDataService } from "./playersdata.service";
+import { playersData } from "../models/playersData";
 
 @Component({
   selector: "app-game-view",
   templateUrl: "./game-view.component.html",
-  styleUrls: ["./game-view.component.css"]
+  styleUrls: ["./game-view.component.css"],
+  providers: [PlayersDataService]
 })
 export class GameViewComponent {
-  playersData: Array<object>;
-  fileID = "12jGE_vFwYWrwlVcQt-dTqBx-KtxR3RFe9ooMRAxYK3k";
-  APIkey = "AIzaSyAN6YQLjtsM1WsxC1_yzjxcmigmOu-jDGI";
-  range = "A2%3AB20";
+  playersData: Array<playersData>;
   player1 = "Player 1";
   player2 = "Player 2";
 
@@ -25,14 +25,7 @@ export class GameViewComponent {
     this.player2 = player1;
   }
 
-  constructor(gDrive: GoogleDriveProvider) {
-    gDrive.load(this.fileID, this.range, this.APIkey).then(
-      data => {
-        this.playersData = data;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+
+  constructor() {
   }
 }

@@ -1,12 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PlayersDataService } from '../playersdata.service';
+import { playersData } from '../../models/playersData';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.css'],
+  providers: [PlayersDataService]
 })
 export class PlayerComponent implements OnInit {
-  @Input() playersData: Array<object>;
+  playersData;
   player1: string;
   player2: string;
 
@@ -44,9 +48,17 @@ export class PlayerComponent implements OnInit {
     });
   }
 
-  constructor() { }
+  constructor(private loadData: PlayersDataService) {
+    async loadPlayers() {
+      this.playersData = await this.loadData.getPlayersData()
+      console.log("playersData", this.playersData);
+      
+    }
+  }
 
   ngOnInit() {
+    console.log("playersData", this.playersData);
+    
   }
 
 }

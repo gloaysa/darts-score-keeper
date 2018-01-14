@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-player',
@@ -9,6 +9,8 @@ export class PlayerComponent implements OnInit {
   @Input() playersData: Array<object>;
   player1: string;
   player2: string;
+
+  @Output() players = new EventEmitter;
 
   disableAll() {
     return true;
@@ -21,6 +23,7 @@ export class PlayerComponent implements OnInit {
       this.player2 = name;
     }
     this.updatePlayerArray(name);
+    this.players.emit({player1: this.player1, player2: this.player2});
   }
 
   selectClassPlayer(name) {

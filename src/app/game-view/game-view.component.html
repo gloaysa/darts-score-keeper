@@ -1,11 +1,6 @@
-<mat-card-content>
-  <mat-button-toggle-group>
-    <div *ngFor="let data of playersData">
-      <mat-button-toggle>{{ data.player }} </mat-button-toggle>
-    </div>
-  </mat-button-toggle-group>
+<button mat-button [routerLink]="['./select-player']">Select player</button>
 
+<mat-card-content>
+  <app-player [playersData]="playersData"> </app-player>
 </mat-card-content>
 
-<button mat-button [routerLink]="['./select-player']">Play</button>
-<router-outlet></router-outlet>

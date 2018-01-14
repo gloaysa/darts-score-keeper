@@ -1,1 +1,10 @@
-<app-circle-tracker></app-circle-tracker>
+<h1>Player 1: {{ player1}}</h1>
+<h1>Player 2: {{ player2}}</h1>
+<div class="container row">
+    <div class="col col-6" *ngFor="let data of playersData">
+        <button mat-button
+        (click)="selectPlayer(data.player)"
+        [disabled]="selectClassPlayer(data.player)"
+         > {{ data.player}} </button>
+    </div>
+</div>

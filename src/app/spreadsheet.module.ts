@@ -37,7 +37,7 @@ export class GoogleDriveProvider {
             const pos = index + 1;
             const name = entry[0];
             const points = entry[1];
-            obj = {position: pos, player: name, points: points};
+            obj = {position: pos, player: name, points: points, winner: false, playing: false};
             returnArray.push( obj );
             });
           }

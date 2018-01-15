@@ -5,10 +5,10 @@ export class playersData {
     winner: boolean;
     playing: boolean;
     constructor(pos, name, points) {
-        this.position = pos,
-        this.player = name,
-        this.points = points,
-        this.winner =false
-        this.playing = false
+        this.position = pos;
+        this.player = name;
+        this.points = points;
+        this.winner = false;
+        this.playing = false;
     }
 }

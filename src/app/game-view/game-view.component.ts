@@ -11,8 +11,8 @@ import { playersData } from "../models/playersData";
 })
 export class GameViewComponent {
   playersData: Array<playersData>;
-  player1 = "Player 1";
-  player2 = "Player 2";
+  player1: string;
+  player2: string;
 
   showPlayers(event):void {
     this.player1 = event.player1;

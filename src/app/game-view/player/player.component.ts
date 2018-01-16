@@ -11,20 +11,23 @@ import { async } from '@angular/core/testing';
 })
 export class PlayerComponent implements OnInit {
   playersData: Array<playersData>;
-  player1: string;
-  player2: string;
+  player1: Object;
+  player2 = "";
 
   disableAll() {
     return true;
   }
 
   selectPlayer(player) {
-    if (!this.player1 || (this.player1 && this.player2)) {
-      this.playersService.selectPlayers(player, undefined);
-    } else {
-      this.playersService.selectPlayers(undefined, player);
-    }
-    this.updatePlayerArray(player);
+    this.playersData.forEach(object => {
+      if (!this.player1 || (this.player1 && this.player2)) {
+        this.playersService.selectPlayers(player, undefined);
+      } else {
+        this.playersService.selectPlayers(undefined, player);
+      }
+    });
+    this.updatePlayersData();
+    console.log(this.playersData)
   }
 
   selectClassPlayer(name) {
@@ -33,9 +36,17 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  updatePlayerArray(name) {
+  twoPlayersSelected(): boolean {
+    if (this.player1 && this.player2) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  updatePlayersData() {
     this.playersData.forEach(player => {
-      if (player.player === this.player1 || player.player === this.player2) {
+      if (player.name === this.player1.name || player.name === this.player2.name) {
         player.playing = true;
       } else {
         player.playing = false;

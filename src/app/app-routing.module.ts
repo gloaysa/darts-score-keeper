@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PlayerComponent } from './game-view/player/player.component';
 import { ScoreTrackerComponent } from './score-tracker/score-tracker.component';
 import { GameViewComponent } from './game-view/game-view.component';
+import { CircleTrackerComponent } from './game-view/circle-tracker/circle-tracker.component';
 
 const appRoutes: Routes = [
   {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
       {
         path: "",
         component: PlayerComponent
+      },
+      {
+        path: "game",
+        component: CircleTrackerComponent
       }
     ]
   }

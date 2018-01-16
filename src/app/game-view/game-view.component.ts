@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { GoogleDriveProvider } from "../spreadsheet.module";
-import { PlayersDataService } from "./playersdata.service";
+import { PlayersDataService } from "../shared/playersdata.service";
 import { playersData } from "../models/playersData";
 
 @Component({

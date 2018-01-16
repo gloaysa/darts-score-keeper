@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PlayersDataService } from '../playersdata.service';
+import { PlayersDataService } from '../../shared/playersdata.service';
 import { playersData } from '../../models/playersData';
 import { async } from '@angular/core/testing';
 

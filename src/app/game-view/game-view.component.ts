@@ -10,14 +10,8 @@ import { playersData } from "../models/playersData";
   providers: [PlayersDataService]
 })
 export class GameViewComponent {
-  playersData: Array<playersData>;
-  player1: string;
-  player2: string;
-
-  showPlayers(event):void {
-    this.player1 = event.player1;
-    this.player2 = event.player2;
-  }
+  private player1 = "Player 1";
+  private player2 = "Player 2";
 
   changePlayers() {
     const player1 = this.player1;
@@ -25,7 +19,9 @@ export class GameViewComponent {
     this.player2 = player1;
   }
 
-
-  constructor() {
+  constructor(private playersService: PlayersDataService) {
+    console.log("GAME VIEW COMPONENT");
+    this.playersService.sharePlayer1$.subscribe(player => (this.player1 = player));
+    this.playersService.sharePlayer2$.subscribe(player => (this.player2 = player));
   }
 }

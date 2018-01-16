@@ -20,9 +20,9 @@ export class PlayerComponent implements OnInit {
 
   selectPlayer(player) {
     if (!this.player1 || (this.player1 && this.player2)) {
-      this.playersService.selectPlayers(player.name, undefined);
+      this.playersService.selectPlayers(player, undefined);
     } else {
-      this.playersService.selectPlayers(undefined, player.name);
+      this.playersService.selectPlayers(undefined, player);
     }
     this.updatePlayerArray(player);
   }

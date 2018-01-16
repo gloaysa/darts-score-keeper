@@ -10,8 +10,8 @@ import { async } from '@angular/core/testing';
   providers: [PlayersDataService]
 })
 export class PlayerComponent implements OnInit {
-  data = this.playersService.loadPlayersData().subscribe(value => {
-    console.log(value.values);
+
+  /* data = this.playersService.loadPlayersData().subscribe(value => {
     const data = value.values;
     const returnArray = [];
     if (data && data.length > 0) {
@@ -24,14 +24,31 @@ export class PlayerComponent implements OnInit {
         returnArray.push(obj);
       });
     }
-    console.log(returnArray);
     this.playersData = returnArray;
-  });
+  }); */
   playersData: Array<playersData>;
   player1: string;
   player2: string;
 
   @Output() players = new EventEmitter();
+
+  getData() {
+    this.playersService.loadPlayersData().subscribe(value => {
+      const data = value.values;
+      const returnArray = [];
+      if (data && data.length > 0) {
+        data.forEach((entry: Array<string>, index: number) => {
+          let obj: playersData;
+          const pos = index + 1;
+          const name = entry[0];
+          const points = entry[1];
+          obj = new playersData(pos, name, points);
+          returnArray.push(obj);
+        });
+      }
+      this.playersData = returnArray;
+    });
+  }
 
   disableAll() {
     return true;
@@ -66,5 +83,7 @@ export class PlayerComponent implements OnInit {
 
   constructor(public playersService: PlayersDataService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
 }

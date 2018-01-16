@@ -19,6 +19,9 @@ export class PlayersDataService {
 
   selectPlayers(name1, name2) {
     name1 ? this.player1.next(name1) : this.player2.next(name2);
+    console.log("Players updated!", name1 || name2);
+    console.log("shared1 es:", this.sharePlayer1$.subscribe(player => player));
+    console.log("shared2 es:", this.sharePlayer2$);
   }
 
   loadPlayersData() {

@@ -18,13 +18,13 @@ export class PlayerComponent implements OnInit {
     return true;
   }
 
-  selectPlayer(name) {
+  selectPlayer(player) {
     if (!this.player1 || (this.player1 && this.player2)) {
-      this.playersService.selectPlayers(name, undefined);
+      this.playersService.selectPlayers(player.name, undefined);
     } else {
-      this.playersService.selectPlayers(undefined, name);
+      this.playersService.selectPlayers(undefined, player.name);
     }
-    this.updatePlayerArray(name);
+    this.updatePlayerArray(player);
   }
 
   selectClassPlayer(name) {
@@ -34,21 +34,18 @@ export class PlayerComponent implements OnInit {
   }
 
   updatePlayerArray(name) {
-    const self = this;
-    this.playersData.forEach(function(player) {
-      if (player.player === self.player1 || player.player === self.player2) {
+    this.playersData.forEach(player => {
+      if (player.player === this.player1 || player.player === this.player2) {
         player.playing = true;
       } else {
         player.playing = false;
       }
     });
+    this.playersService.updatePlayersData(this.playersData);
   }
 
   constructor(private playersService: PlayersDataService) {
-    this.playersService.loadPlayersData().subscribe();
-    this.playersService.sharePlayersData$.subscribe(data => {
-      this.playersData = JSON.parse(data);
-    });
+    this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
    }

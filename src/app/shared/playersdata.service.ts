@@ -43,4 +43,8 @@ export class PlayersDataService {
     });
   }
 
+  updatePlayersData(newData) {
+    this.playersData.next(JSON.stringify(newData));
+  }
+
 }

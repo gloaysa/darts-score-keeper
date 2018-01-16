@@ -33,10 +33,11 @@ export class ScoreTableComponent implements OnInit {
   }
 
   constructor(private playersService: PlayersDataService) {
-    this.playersService.loadPlayersData().subscribe(data => {
-      this.results = data;
+    this.playersService.loadPlayersData().subscribe();
+    this.playersService.sharePlayersData$.subscribe(data => {
+      this.results = JSON.parse(data);
       this.dataSource = new MatTableDataSource();
-      this.dataSource.data = this.orderByPoints(data);
+      this.dataSource.data = this.orderByPoints(this.results);
     });
   }
 

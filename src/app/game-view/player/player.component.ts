@@ -45,7 +45,10 @@ export class PlayerComponent implements OnInit {
   }
 
   constructor(private playersService: PlayersDataService) {
-    this.playersService.loadPlayersData().subscribe(hola => this.playersData = hola);
+    this.playersService.loadPlayersData().subscribe();
+    this.playersService.sharePlayersData$.subscribe(data => {
+      this.playersData = JSON.parse(data);
+    });
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
    }

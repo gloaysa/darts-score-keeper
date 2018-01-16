@@ -9,16 +9,34 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PlayersDataService {
-  playersData$;
+  private player1 = new Subject<string>();
+  private player2 = new Subject<string>();
+
+  public sharePlayer1$ = this.player1.asObservable();
+  public sharePlayer2$ = this.player2.asObservable();
 
   constructor(private http: Http) {}
 
-   loadPlayersData() {
-    return this.http.get(environment.sheetURL).map(res => res.json());
+  selectPlayers(name1, name2) {
+    name1 ? this.player1.next(name1) : this.player2.next(name2);
   }
 
-
-  public setPlayersData(newData: Array<playersData>) {
-    this.playersData$ = newData;
+  loadPlayersData() {
+    return this.http.get(environment.sheetURL).map(res => {
+      const data = res.json().values;
+      const returnArray = [];
+      if (data && data.length > 0) {
+        data.forEach((entry: Array<string>, index: number) => {
+          let obj: playersData;
+          const pos = index + 1;
+          const name = entry[0];
+          const points = entry[1];
+          obj = new playersData(pos, name, points);
+          returnArray.push(obj);
+        });
+      }
+      return returnArray;
+    });
   }
+
 }

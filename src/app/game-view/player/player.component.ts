@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayersDataService } from '../../shared/playersdata.service';
 import { playersData } from '../../models/playersData';
 import { async } from '@angular/core/testing';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: "app-player",
@@ -10,45 +11,12 @@ import { async } from '@angular/core/testing';
   providers: [PlayersDataService]
 })
 export class PlayerComponent implements OnInit {
-
-  /* data = this.playersService.loadPlayersData().subscribe(value => {
-    const data = value.values;
-    const returnArray = [];
-    if (data && data.length > 0) {
-      data.forEach((entry: Array<string>, index: number) => {
-        let obj: playersData;
-        const pos = index + 1;
-        const name = entry[0];
-        const points = entry[1];
-        obj = new playersData(pos, name, points);
-        returnArray.push(obj);
-      });
-    }
-    this.playersData = returnArray;
-  }); */
   playersData: Array<playersData>;
   player1: string;
   player2: string;
+  subs: Subscription;
 
   @Output() players = new EventEmitter();
-
-  getData() {
-    this.playersService.loadPlayersData().subscribe(value => {
-      const data = value.values;
-      const returnArray = [];
-      if (data && data.length > 0) {
-        data.forEach((entry: Array<string>, index: number) => {
-          let obj: playersData;
-          const pos = index + 1;
-          const name = entry[0];
-          const points = entry[1];
-          obj = new playersData(pos, name, points);
-          returnArray.push(obj);
-        });
-      }
-      this.playersData = returnArray;
-    });
-  }
 
   disableAll() {
     return true;
@@ -56,12 +24,11 @@ export class PlayerComponent implements OnInit {
 
   selectPlayer(name) {
     if (!this.player1 || (this.player1 && this.player2)) {
-      this.player1 = name;
+      this.playersService.selectPlayers(name, undefined);
     } else {
-      this.player2 = name;
+      this.playersService.selectPlayers(undefined, name);
     }
     this.updatePlayerArray(name);
-    this.players.emit({ player1: this.player1, player2: this.player2 });
   }
 
   selectClassPlayer(name) {
@@ -81,9 +48,11 @@ export class PlayerComponent implements OnInit {
     });
   }
 
-  constructor(public playersService: PlayersDataService) { }
+  constructor(public playersService: PlayersDataService) {
+    this.playersService.loadPlayersData().subscribe(value => this.playersData = value);
+    this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
+    this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
+   }
 
-  ngOnInit() {
-    this.getData();
-  }
+  ngOnInit() {}
 }

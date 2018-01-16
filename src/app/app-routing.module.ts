@@ -15,7 +15,7 @@ const appRoutes: Routes = [
     component: GameViewComponent,
     children: [
       {
-        path: "select-player",
+        path: "",
         component: PlayerComponent
       }
     ]

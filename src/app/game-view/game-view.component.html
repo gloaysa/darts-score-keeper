@@ -4,7 +4,7 @@
       <h1>{{player1}}</h1>
     </ng-container>
     <ng-template #player1Template>
-      <h1>Player 1</h1>
+      <h2>Player 1</h2>
     </ng-template>
   </div>
   <div class="col-2">
@@ -12,17 +12,17 @@
       <i class="material-icons">compare_arrows</i>
     </button>
   </div>
-  <div class="col-5">  
+  <div class="col-5">
     <ng-container *ngIf="player2; else player2Template">
       <h1>{{player2}}</h1>
     </ng-container>
     <ng-template #player2Template>
-      <h1>Player 2</h1>
+      <h2>Player 2</h2>
     </ng-template>
   </div>
 </div>
 
 <mat-card-content>
-  <app-player (players)="showPlayers($event)"> </app-player>
+  <router-outlet></router-outlet>
 </mat-card-content>
 

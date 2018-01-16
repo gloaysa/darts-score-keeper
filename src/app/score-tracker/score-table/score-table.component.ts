@@ -1,40 +1,44 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { GoogleDriveProvider } from "../../spreadsheet.module";
+import { Component, OnInit } from "@angular/core";
 
-import { MatTableDataSource, MatSort } from "@angular/material";
+import { MatTableDataSource } from "@angular/material";
+import { PlayersDataService } from "../../shared/playersdata.service";
+import { playersData } from "../../models/playersData";
 
 @Component({
   selector: "app-score-table",
   templateUrl: "./score-table.component.html",
-  styleUrls: ["./score-table.component.css"]
+  styleUrls: ["./score-table.component.css"],
+  providers: [PlayersDataService]
 })
 export class ScoreTableComponent implements OnInit {
-  results: Array<object>;
-  fileID = "12jGE_vFwYWrwlVcQt-dTqBx-KtxR3RFe9ooMRAxYK3k";
-  APIkey = "AIzaSyAN6YQLjtsM1WsxC1_yzjxcmigmOu-jDGI";
-  range = "A2%3AB20";
+  private results;
 
   displayedColumns = ["position", "player", "points"];
   dataSource: MatTableDataSource<object>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  orderByPoints = arr => {
+    for (let j = 0; j < arr.length; ++j) {
+      let iMin = j;
+      let i = j;
+      for (++i; i < arr.length; ++i) {
+        parseInt(arr[i].points) > parseInt(arr[iMin].points) && (iMin = i);
+      }
+      const position = arr[j].position;
+      arr[j].position = arr[iMin].position;
+      arr[iMin].position = position;
+      [arr[j], arr[iMin]] = [arr[iMin], arr[j]];
+    }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    return arr;
   }
 
-  constructor(gDrive: GoogleDriveProvider) {
-    gDrive.load(this.fileID, this.range, this.APIkey).then(
-      data => {
-        this.results = data;
-        this.dataSource = new MatTableDataSource(this.results);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+  constructor(private playersService: PlayersDataService) {
+    this.playersService.loadPlayersData().subscribe();
+    this.playersService.sharePlayersData$.subscribe(data => {
+      this.results = JSON.parse(data);
+      this.dataSource = new MatTableDataSource();
+      this.dataSource.data = this.orderByPoints(this.results);
+    });
   }
 
   ngOnInit() {}

@@ -1,11 +1,18 @@
-<mat-card-content>
-  <mat-button-toggle-group>
-    <div *ngFor="let data of playersData">
-      <mat-button-toggle>{{ data.player }} </mat-button-toggle>
-    </div>
-  </mat-button-toggle-group>
+<div class="row">
+  <div class="col-5">
+      <h2>{{ player1 }}</h2>
+  </div>
+  <div class="col-2">
+    <button mat-icon-button (click)="changePlayers()">
+      <i class="material-icons">compare_arrows</i>
+    </button>
+  </div>
+  <div class="col-5">
+      <h2>{{ player2 }}</h2>
+  </div>
+</div>
 
+<mat-card-content>
+  <router-outlet></router-outlet>
 </mat-card-content>
 
-<button mat-button [routerLink]="['./select-player']">Play</button>
-<router-outlet></router-outlet>

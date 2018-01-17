@@ -21,6 +21,10 @@ export class GameViewComponent {
   }
 
   constructor(private playersService: PlayersDataService) {
+<<<<<<< HEAD
+=======
+    this.playersService.loadPlayersData().subscribe();
+>>>>>>> pruebas2
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
     this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));

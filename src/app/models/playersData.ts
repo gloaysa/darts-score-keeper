@@ -14,5 +14,9 @@ export class playersData {
         this.playing = false;
         this.player1 = false;
         this.player2 = false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> pruebas2
     }
 }

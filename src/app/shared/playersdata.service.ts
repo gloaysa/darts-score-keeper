@@ -26,6 +26,10 @@ export class PlayersDataService {
     console.log(player1, player2);
   }
 
+  updatePlayersData(newData: Array<playersData>) {
+    this.playersData.next(JSON.stringify(newData));
+  }
+
   loadPlayersData() {
     return this.http.get(environment.sheetURL).map(res => {
       const data = res.json().values;

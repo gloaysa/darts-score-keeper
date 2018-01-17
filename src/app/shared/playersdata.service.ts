@@ -23,7 +23,6 @@ export class PlayersDataService {
 
   selectPlayers(player1, player2) {
     player1 ? this.player1.next(player1) : this.player2.next(player2);
-    console.log(player1, player2);
   }
 
   updatePlayersData(newData: Array<playersData>) {
@@ -46,10 +45,6 @@ export class PlayersDataService {
       }
       this.playersData.next(JSON.stringify(returnArray));
     });
-  }
-
-  updatePlayersData(newData) {
-    this.playersData.next(JSON.stringify(newData));
   }
 
 }

@@ -11,25 +11,13 @@ import { async } from '@angular/core/testing';
 })
 export class PlayerComponent implements OnInit {
   playersData: Array<playersData>;
-  player1: Object;
-  player2 = "";
+  player1: string;
+  player2: string;
 
   disableAll() {
     return true;
   }
 
-<<<<<<< HEAD
-  selectPlayer(player) {
-    this.playersData.forEach(object => {
-      if (!this.player1 || (this.player1 && this.player2)) {
-        this.playersService.selectPlayers(player, undefined);
-      } else {
-        this.playersService.selectPlayers(undefined, player);
-      }
-    });
-    this.updatePlayersData();
-    console.log(this.playersData)
-=======
   selectPlayer(name) {
     if (!this.player1 || (this.player1 && this.player2)) {
       this.playersService.selectPlayers(name, undefined);
@@ -37,7 +25,6 @@ export class PlayerComponent implements OnInit {
       this.playersService.selectPlayers(undefined, name);
     }
     this.updatePlayerArray();
->>>>>>> pruebas2
   }
 
   selectClassPlayer(name) {
@@ -46,7 +33,6 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   twoPlayersSelected(): boolean {
     if (this.player1 && this.player2) {
       return false;
@@ -55,10 +41,6 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  updatePlayersData() {
-    this.playersData.forEach(player => {
-      if (player.name === this.player1.name || player.name === this.player2.name) {
-=======
   updatePlayerArray() {
     const self = this;
     this.playersData.forEach(function(player) {
@@ -67,7 +49,6 @@ export class PlayerComponent implements OnInit {
         player.playing = true;
       } else if (player.name === self.player2) {
         player.player2 = true;
->>>>>>> pruebas2
         player.playing = true;
       } else {
         player.playing = false;

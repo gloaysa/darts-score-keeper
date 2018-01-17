@@ -24,7 +24,7 @@ export class PlayerComponent implements OnInit {
     } else {
       this.playersService.selectPlayers(undefined, name);
     }
-    this.updatePlayerArray(name);
+    this.updatePlayerArray();
   }
 
   selectClassPlayer(name) {
@@ -33,22 +33,32 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  updatePlayerArray(name) {
+  twoPlayersSelected(): boolean {
+    if (this.player1 && this.player2) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  updatePlayerArray() {
     const self = this;
     this.playersData.forEach(function(player) {
-      if (player.player === self.player1 || player.player === self.player2) {
+      if (player.name === self.player1) {
+        player.player1 = true;
+        player.playing = true;
+      } else if (player.name === self.player2) {
+        player.player2 = true;
         player.playing = true;
       } else {
         player.playing = false;
       }
     });
+    this.playersService.updatePlayersData(this.playersData);
   }
 
   constructor(private playersService: PlayersDataService) {
-    this.playersService.loadPlayersData().subscribe();
-    this.playersService.sharePlayersData$.subscribe(data => {
-      this.playersData = JSON.parse(data);
-    });
+    this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
    }

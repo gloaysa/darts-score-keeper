@@ -57,11 +57,12 @@ export class PlayerComponent implements OnInit {
     this.playersService.updatePlayersData(this.playersData);
   }
 
-  constructor(private playersService: PlayersDataService) {
+  constructor(private playersService: PlayersDataService) {}
+
+  ngOnInit() {
+    this.playersService.loadPlayersData();
     this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
-   }
-
-  ngOnInit() {}
+  }
 }

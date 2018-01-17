@@ -1,13 +1,37 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PlayersDataService } from '../../shared/playersdata.service';
+import { playersData } from '../../models/playersData';
+import { Circle } from '../../models/circle.model';
 
 @Component({
   selector: "app-circle-tracker",
   templateUrl: "./circle-tracker.component.html",
-  styleUrls: ["./circle-tracker.component.css"]
+  styleUrls: ["./circle-tracker.component.css"],
+  providers: [PlayersDataService]
 })
 export class CircleTrackerComponent implements OnInit {
+  public playersData;
+  public player1;
+  public player2;
   count = 0;
   circles = [];
+
+  selectPlayers() {
+    this.playersData.forEach(player => {
+      if (player.player1) { this.player1 = player; }
+      if (player.player2) { this.player2 = player; }
+    });
+    console.log("player1:", this.player1);
+    console.log("player2:", this.player2);
+    return true;
+  }
+
+  createCircles() {
+    for (let i = 15; i < 22; i++) {
+      const circle = new Circle(i, {player: 0});
+      this.circles.push(circle);
+    }
+  }
 
   addPoints(index) {
     const circle = this.circles[index];
@@ -26,16 +50,13 @@ export class CircleTrackerComponent implements OnInit {
 
   }
 
-  constructor() {
-    const self = this;
-    function createCircles() {
-      for (let i = 15; i < 22; i++) {
-        const circle = { number: i, once: false, twice: false, closed: false, player: 0 };
-        self.circles.push(circle);
-      }
-    }
-    createCircles();
-  }
+  constructor(private playersService: PlayersDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("hola");
+    this.playersService.loadPlayersData().subscribe();
+    this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
+    this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));
+    console.log(this.player1)
+  }
 }

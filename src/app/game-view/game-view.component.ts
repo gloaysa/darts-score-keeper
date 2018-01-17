@@ -20,7 +20,7 @@ export class GameViewComponent {
   }
 
   constructor(private playersService: PlayersDataService) {
-    console.log("GAME VIEW COMPONENT");
+    this.playersService.loadPlayersData().subscribe();
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
   }

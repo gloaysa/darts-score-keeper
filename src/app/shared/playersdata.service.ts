@@ -21,8 +21,8 @@ export class PlayersDataService {
     this.loadPlayersData();
   }
 
-  selectPlayers(name1, name2) {
-    name1 ? this.player1.next(name1) : this.player2.next(name2);
+  selectPlayers(player1, player2) {
+    player1 ? this.player1.next(player1) : this.player2.next(player2);
   }
 
   updatePlayersData(newData: Array<playersData>) {

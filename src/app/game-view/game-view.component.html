@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col-5">
-    <h2>{{ player1.name }}</h2>
+    <ng-container *ngIf="player1.name; else player1Template">
+      <h2> {{ player1.name }} </h2>
+    </ng-container>
+    <ng-template #player1Template>
+      Player 1
+    </ng-template>
   </div>
 
   <div class="col-2">
@@ -9,7 +14,12 @@
     </button>
   </div>
   <div class="col-5">
-    <h2>{{ player2.name }}</h2>
+    <ng-container *ngIf="player2.name; else player2Template">
+      <h2> {{ player2.name }} </h2>
+    </ng-container>
+    <ng-template #player2Template>
+      Player 2
+    </ng-template>
   </div>
 </div>
 

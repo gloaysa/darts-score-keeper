@@ -8,7 +8,7 @@ import { Player } from "../../models/player.model";
   selector: "app-score-table",
   templateUrl: "./score-table.component.html",
   styleUrls: ["./score-table.component.css"],
-  providers: [PlayersDataService]
+  providers: []
 })
 export class ScoreTableComponent implements OnInit {
   private results;
@@ -32,14 +32,17 @@ export class ScoreTableComponent implements OnInit {
     return arr;
   }
 
-  constructor(private playersService: PlayersDataService) {
-    this.playersService.loadPlayersData().subscribe();
+  getData() {
     this.playersService.sharePlayersData$.subscribe(data => {
-      this.results = JSON.parse(data);
+      this.results = data;
       this.dataSource = new MatTableDataSource();
       this.dataSource.data = this.orderByPoints(this.results);
     });
   }
 
-  ngOnInit() {}
+  constructor(private playersService: PlayersDataService) {}
+
+  ngOnInit() {
+    this.getData();
+  }
 }

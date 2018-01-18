@@ -6,19 +6,20 @@ import { Http, Response } from '@angular/http';
 import { Player } from '../models/player.model';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class PlayersDataService {
-  private player1 = new Subject<string>();
-  private player2 = new Subject<string>();
-  private playersData = new Subject<string>();
+  private player1 = new BehaviorSubject<Player>(<Player>{});
+  private player2 = new BehaviorSubject<Player>(<Player>{});
+  private playersData = new BehaviorSubject<Array<Player>>(<Array<Player>>[]);
 
   public sharePlayer1$ = this.player1.asObservable();
   public sharePlayer2$ = this.player2.asObservable();
   public sharePlayersData$ = this.playersData.asObservable();
 
   constructor(private http: Http) {
-    this.loadPlayersData();
+    this.loadPlayersData().subscribe();
   }
 
   selectPlayers(player1, player2) {
@@ -26,7 +27,7 @@ export class PlayersDataService {
   }
 
   updatePlayersData(newData: Array<Player>) {
-    this.playersData.next(JSON.stringify(newData));
+    this.playersData.next(newData);
   }
 
   loadPlayersData() {
@@ -43,7 +44,7 @@ export class PlayersDataService {
           returnArray.push(obj);
         });
       }
-      this.playersData.next(JSON.stringify(returnArray));
+      this.playersData.next(returnArray);
     });
   }
 

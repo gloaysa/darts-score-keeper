@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleDriveProvider} from '../spreadsheet.module';
+import { PlayersDataService } from '../shared/playersdata.service';
 
 @Component({
   selector: "app-score-tracker",
   templateUrl: "./score-tracker.component.html",
   styleUrls: ["./score-tracker.component.css"],
-  providers: [GoogleDriveProvider]
+  providers: [PlayersDataService]
 })
 export class ScoreTrackerComponent implements OnInit {
 

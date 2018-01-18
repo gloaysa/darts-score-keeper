@@ -9,8 +9,8 @@ import { PlayersDataService } from "../shared/playersdata.service";
   providers: [PlayersDataService]
 })
 export class GameViewComponent {
-  public player1 = "Player 1";
-  public player2 = "Player 2";
+  public player1;
+  public player2;
 
   changePlayers() {
     const player1 = this.player1;
@@ -18,8 +18,9 @@ export class GameViewComponent {
     this.player2 = player1;
   }
 
-  constructor(private playersService: PlayersDataService) {
-    this.playersService.loadPlayersData().subscribe();
+  constructor(private playersService: PlayersDataService) {}
+
+  ngOnInit() {
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
   }

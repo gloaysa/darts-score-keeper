@@ -10,31 +10,31 @@ import { async } from '@angular/core/testing';
   providers: []
 })
 export class PlayerComponent implements OnInit {
-  playersData: Array<Player>;
-  player1: string;
-  player2: string;
+  public playersData: Array<Player>;
+  private player1: Player;
+  private player2: Player;
 
   disableAll() {
     return true;
   }
 
-  selectPlayer(name) {
-    if (!this.player1 || (this.player1 && this.player2)) {
-      this.playersService.selectPlayers(name, undefined);
+  selectPlayer(player) {
+    if (!this.player1.name || (this.player1.name && this.player2.name)) {
+      this.playersService.selectPlayers(player, undefined);
     } else {
-      this.playersService.selectPlayers(undefined, name);
+      this.playersService.selectPlayers(undefined, player);
     }
     this.updatePlayerArray();
   }
 
-  selectClassPlayer(name) {
-    if (this.player1 === name || this.player2 === name) {
+  selectClassPlayer(player) {
+    if (this.player1.name === player.name || this.player2.name === player.name) {
       return true;
     }
   }
 
   twoPlayersSelected(): boolean {
-    if (this.player1 && this.player2) {
+    if (this.player1.name && this.player2.name) {
       return false;
     } else {
       return true;
@@ -42,12 +42,11 @@ export class PlayerComponent implements OnInit {
   }
 
   updatePlayerArray() {
-    const self = this;
-    this.playersData.forEach(function(player) {
-      if (player.name === self.player1) {
+    this.playersData.forEach(player => {
+      if (player.name === this.player1.name) {
         player.player1 = true;
         player.playing = true;
-      } else if (player.name === self.player2) {
+      } else if (player.name === this.player2.name) {
         player.player2 = true;
         player.playing = true;
       } else {
@@ -60,8 +59,7 @@ export class PlayerComponent implements OnInit {
   constructor(private playersService: PlayersDataService) {}
 
   ngOnInit() {
-    this.playersService.loadPlayersData();
-    this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));
+    this.playersService.sharePlayersData$.subscribe(data => this.playersData = data);
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
   }

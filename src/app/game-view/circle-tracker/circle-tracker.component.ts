@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PlayersDataService } from '../../shared/playersdata.service';
-import { playersData } from '../../models/playersData';
 import { Circle } from '../../models/circle.model';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { MatTableDataSource } from "@angular/material";
 import { PlayersDataService } from "../../shared/playersdata.service";
-import { playersData } from "../../models/playersData";
+import { Player } from "../../models/player.model";
 
 @Component({
   selector: "app-score-table",

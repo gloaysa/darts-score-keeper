@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { GoogleDriveProvider } from '../spreadsheet.module';
 import { Http, Response } from '@angular/http';
-import { playersData } from '../models/playersData';
+import { Player } from '../models/player.model';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 
@@ -25,7 +25,7 @@ export class PlayersDataService {
     player1 ? this.player1.next(player1) : this.player2.next(player2);
   }
 
-  updatePlayersData(newData: Array<playersData>) {
+  updatePlayersData(newData: Array<Player>) {
     this.playersData.next(JSON.stringify(newData));
   }
 
@@ -35,11 +35,11 @@ export class PlayersDataService {
       const returnArray = [];
       if (data && data.length > 0) {
         data.forEach((entry: Array<string>, index: number) => {
-          let obj: playersData;
+          let obj: Player;
           const pos = index + 1;
           const name = entry[0];
           const points = entry[1];
-          obj = new playersData(pos, name, points);
+          obj = new Player(pos, name, points);
           returnArray.push(obj);
         });
       }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayersDataService } from '../../shared/playersdata.service';
-import { playersData } from '../../models/playersData';
+import { Player } from '../../models/player.model';
 import { async } from '@angular/core/testing';
 
 @Component({
@@ -10,7 +10,7 @@ import { async } from '@angular/core/testing';
   providers: []
 })
 export class PlayerComponent implements OnInit {
-  playersData: Array<playersData>;
+  playersData: Array<Player>;
   player1: string;
   player2: string;
 

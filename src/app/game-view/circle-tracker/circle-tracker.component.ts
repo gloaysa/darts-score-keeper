@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PlayersDataService } from '../../../shared/playersdata.service';
 import { Circle } from '../../../models/circle.model';
+import { ColumnCircle } from '../../../models/column-circle.model';
 import { Player } from '../../../models/player.model';
 
 @Component({
@@ -11,11 +12,11 @@ import { Player } from '../../../models/player.model';
 })
 export class CircleTrackerComponent implements OnInit {
   public playersData;
-  public player1;
-  public player2;
-  public circle1: Circle;
-  public circle2: Circle;
-  circles = [];
+  private player1;
+  private player2;
+  public column1: ColumnCircle;
+  public column2: ColumnCircle;
+  private count;
 
   fetchEvent() {
     this.playersService.sharePlayersData$.subscribe(data => {
@@ -33,27 +34,29 @@ export class CircleTrackerComponent implements OnInit {
   }
 
   createCircles() {
-    this.circle1 = new Circle(this.player1);
-    this.circle2 = new Circle(this.player2);
+    this.column1 = new ColumnCircle(this.player1);
+    this.column2 = new ColumnCircle(this.player2);
   }
 
 
-  /* addPoints(index) {
-    const circle = this.circles[index];
-    if (circle.closed) {
-      this.count = this.count + circle.number;
+  addPoints(player, circle) {
+    if (this.column1.player === player && circle.closed) {
+      this.column1.points = circle.points + circle.number;
     }
-    if (circle.once && circle.twice && !circle.closed) { this.circles[index].closed = true; }
-    if (circle.once && !circle.twice) { this.circles[index].twice = true; }
-    if (!circle.once) { this.circles[index].once = true; }
-  } */
+    if (this.column2.player === player && circle.closed) {
+      this.column2.points = circle.points + circle.number;
+    }
+    if (circle.once && circle.twice && !circle.closed) { circle.closed = true; }
+    if (circle.once && !circle.twice) { circle.twice = true; }
+    if (!circle.once) { circle.once = true; }
+  }
 
-  /* selectState(index) {
-    if (this.circles[index].closed) { return "closed"; }
-    if (this.circles[index].twice) { return "twice"; }
-    if (this.circles[index].once) { return "once"; }
+  selectState(circle) {
+    if (circle.closed) { return "closed"; }
+    if (circle.twice) { return "twice"; }
+    if (circle.once) { return "once"; }
 
-  } */
+  }
 
   constructor(private playersService: PlayersDataService) {}
 

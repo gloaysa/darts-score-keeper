@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PlayersDataService } from '../../shared/playersdata.service';
-import { Circle } from '../../models/circle.model';
-import { Player } from '../../models/player.model';
+import { PlayersDataService } from '../../../shared/playersdata.service';
+import { Circle } from '../../../models/circle.model';
+import { Player } from '../../../models/player.model';
 
 @Component({
   selector: "app-circle-tracker",

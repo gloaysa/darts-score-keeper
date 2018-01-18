@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { GoogleDriveProvider } from '../spreadsheet.module';
 import { Http, Response } from '@angular/http';
 import { Player } from '../models/player.model';
 import 'rxjs/add/operator/map';
-import { environment } from '../../environments/environment';
+import { environment } from '../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()

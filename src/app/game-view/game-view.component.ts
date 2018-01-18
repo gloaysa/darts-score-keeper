@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { GoogleDriveProvider } from "../spreadsheet.module";
-import { PlayersDataService } from "../shared/playersdata.service";
+import { PlayersDataService } from "../../shared/playersdata.service";
 
 @Component({
   selector: "app-game-view",
   templateUrl: "./game-view.component.html",
   styleUrls: ["./game-view.component.css"],
-  providers: [PlayersDataService]
+  providers: []
 })
 export class GameViewComponent {
   public player1;

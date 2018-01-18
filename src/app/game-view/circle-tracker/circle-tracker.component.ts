@@ -13,8 +13,17 @@ export class CircleTrackerComponent implements OnInit {
   public playersData;
   public player1;
   public player2;
-  count = 0;
+  public circle1: Circle;
+  public circle2: Circle;
   circles = [];
+
+  fetchEvent() {
+    this.playersService.sharePlayersData$.subscribe(data => {
+      this.playersData = data;
+      this.selectPlayers();
+      this.createCircles();
+    });
+  }
 
   selectPlayers() {
     this.playersData.forEach(player => {
@@ -24,20 +33,12 @@ export class CircleTrackerComponent implements OnInit {
   }
 
   createCircles() {
-    for (let i = 15; i < 22; i++) {
-      const circle = new Circle(i, {player: 0});
-      this.circles.push(circle);
-    }
+    this.circle1 = new Circle(this.player1);
+    this.circle2 = new Circle(this.player2);
   }
 
-  fetchEvent() {
-    this.playersService.sharePlayersData$.subscribe(data => {
-      this.playersData = data;
-      this.selectPlayers();
-    });
-  }
 
-  addPoints(index) {
+  /* addPoints(index) {
     const circle = this.circles[index];
     if (circle.closed) {
       this.count = this.count + circle.number;
@@ -45,14 +46,14 @@ export class CircleTrackerComponent implements OnInit {
     if (circle.once && circle.twice && !circle.closed) { this.circles[index].closed = true; }
     if (circle.once && !circle.twice) { this.circles[index].twice = true; }
     if (!circle.once) { this.circles[index].once = true; }
-  }
+  } */
 
-  selectState(index) {
+  /* selectState(index) {
     if (this.circles[index].closed) { return "closed"; }
     if (this.circles[index].twice) { return "twice"; }
     if (this.circles[index].once) { return "once"; }
 
-  }
+  } */
 
   constructor(private playersService: PlayersDataService) {}
 

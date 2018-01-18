@@ -6,7 +6,7 @@ export class Circle {
   closed: boolean;
   player: object;
 
-  constructor(number, player) {
+  constructor(player) {
     this.number = [15, 16, 17, 18, 19, 20, 25];
     this.points = 0;
     this.once = false;

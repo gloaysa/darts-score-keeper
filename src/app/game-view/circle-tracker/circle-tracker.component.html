@@ -1,16 +1,24 @@
-<div fxLayout="column" fxLayoutGap="5px" class="player-column" *ngFor="let circle of circles; let i = index">
-  <div fxFlex>
-    <ng-container *ngIf="circle.number < 21; else icon">
-      <button class="mat-fab" (click)="addPoints(i)" [ngClass]="selectState(i)">{{ circle.number }}</button>
-    </ng-container>
-    <ng-template #icon><button class="mat-fab" (click)="addPoints(i)" [ngClass]="selectState(i)"><i class="material-icons">track_changes</i></button></ng-template>
+<div class="row">
+  <div class="col col-6">
+    <div class="circle" *ngFor="let circle of circle1.number; let i = index">
+      <ng-container *ngIf="circle < 21; else icon">
+        <button class="mat-fab">{{ circle }}</button>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col col-6">
+    <div class="circle" *ngFor="let circle of circle1.number; let i = index">
+      <ng-container *ngIf="circle < 21; else icon">
+        <button class="mat-fab">{{ circle }}</button>
+      </ng-container>
+    </div>
   </div>
 </div>
 
-<div *ngFor="let players of playersData">
-  {{players.name}}
-
-</div>
-
-<h1 *ngIf="player1"> {{player1.name}} </h1>
-<h1 *ngIf="player2"> {{player2.name}} </h1>
+<!-- templates -->
+<ng-template #icon>
+  <button class="mat-fab">
+    <i class="material-icons">track_changes</i>
+  </button>
+</ng-template>

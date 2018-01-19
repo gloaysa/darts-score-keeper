@@ -39,16 +39,28 @@ export class CircleTrackerComponent implements OnInit {
   }
 
 
-  addPoints(player, circle) {
-    if (this.column1.player === player && circle.closed) {
-      this.column1.points = circle.points + circle.number;
-    }
-    if (this.column2.player === player && circle.closed) {
-      this.column2.points = circle.points + circle.number;
+  addPoints(column, circle) {
+    const opositeColumn = this.selectOpositeColumnOf(column);
+    const player = this.selectPlayerFromColumn(column);
+    if (circle.closed) {
+      opositeColumn.number.forEach(cir => {
+        if (cir.number === circle.number && !cir.closed) {
+          column.points = column.points + circle.number;
+          player.points = column.points;
+        }
+      });
     }
     if (circle.once && circle.twice && !circle.closed) { circle.closed = true; }
     if (circle.once && !circle.twice) { circle.twice = true; }
     if (!circle.once) { circle.once = true; }
+  }
+
+  selectOpositeColumnOf(column): ColumnCircle {
+    return column.player === this.player1 ? this.column2 : this.column1;
+  }
+
+  selectPlayerFromColumn(column): Player {
+    return column.player === this.player1 ? this.player1 : this.player2;
   }
 
   selectState(circle) {
@@ -56,6 +68,13 @@ export class CircleTrackerComponent implements OnInit {
     if (circle.twice) { return "twice"; }
     if (circle.once) { return "once"; }
 
+  }
+
+  uploadPlayersData(player) {
+    this.playersData.forEach(playerData => {
+      if (playerData.name === player.name) { playerData = player; }
+    });
+    this.playersService.updatePlayersData(this.playersData);
   }
 
   constructor(private playersService: PlayersDataService) {}

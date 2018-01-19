@@ -12,10 +12,17 @@ export class PlayersDataService {
   private player1 = new BehaviorSubject<Player>(<Player>{});
   private player2 = new BehaviorSubject<Player>(<Player>{});
   private playersData = new BehaviorSubject<Array<Player>>(<Array<Player>>[]);
+  private playing = new BehaviorSubject<boolean>(false);
+  private gameOver = new BehaviorSubject<boolean>(false);
+  private numberOfRounds = new BehaviorSubject<number>(20);
 
   public sharePlayer1$ = this.player1.asObservable();
   public sharePlayer2$ = this.player2.asObservable();
   public sharePlayersData$ = this.playersData.asObservable();
+  public playing$ = this.playing.asObservable();
+  public gameOver$ = this.gameOver.asObservable();
+  public numberOfRounds$ = this.numberOfRounds.asObservable();
+
 
   constructor(private http: Http) {
     this.loadPlayersData().subscribe();
@@ -27,6 +34,18 @@ export class PlayersDataService {
 
   updatePlayersData(newData: Array<Player>) {
     this.playersData.next(newData);
+  }
+
+  updatePlaying(value: boolean) {
+    this.playing.next(value);
+  }
+
+  updateGameOver(value) {
+    this.gameOver.next(value);
+  }
+
+  updateNumberOfRounds(number) {
+    this.numberOfRounds.next(number);
   }
 
   loadPlayersData() {

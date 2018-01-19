@@ -13,6 +13,7 @@ import { CircleTrackerComponent } from "./game-view/circle-tracker/circle-tracke
 import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PlayersDataService } from '../shared/playersdata.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PlayersDataService } from '../shared/playersdata.service';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [PlayersDataService],
   bootstrap: [AppComponent]

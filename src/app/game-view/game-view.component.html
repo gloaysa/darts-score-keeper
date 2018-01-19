@@ -9,10 +9,18 @@
   </div>
 
   <div class="col-2">
-    <button mat-icon-button (click)="changePlayers()">
-      <i class="material-icons">compare_arrows</i>
-    </button>
+    <ng-container *ngIf="!playing; else playingTemplate">
+      <button mat-icon-button (click)="changePlayers()">
+        <i class="material-icons">compare_arrows</i>
+      </button>
+    </ng-container>
+    <ng-template #playingTemplate>
+      <button mat-icon-button (click)="nexTurn()">
+        Turn: {{ numberOfRounds }}
+      </button>
+    </ng-template>
   </div>
+
   <div class="col-5">
     <ng-container *ngIf="player2.name; else player2Template">
       <h2> {{ player2.name }} </h2>
@@ -26,4 +34,8 @@
 <mat-card-content>
   <router-outlet></router-outlet>
 </mat-card-content>
+
+<div>
+  <input type="text" [(ngModel)]="numberOfRounds" />
+</div>
 

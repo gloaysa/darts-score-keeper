@@ -11,13 +11,13 @@ import { Player } from '../../../models/player.model';
   providers: []
 })
 export class CircleTrackerComponent implements OnInit {
-  public playersData;
+  public playersData: Array<Player>;
   private player1: Player;
   private player2: Player;
   public column1: ColumnCircle;
   public column2: ColumnCircle;
   private count: number;
-  public gameOver = false;
+  public gameOver: boolean;
 
   fetchEvent() {
     this.playersService.sharePlayersData$.subscribe(data => {
@@ -25,6 +25,8 @@ export class CircleTrackerComponent implements OnInit {
       this.selectPlayers();
       this.createCircles();
     });
+    this.playersService.updatePlaying(true);
+    this.playersService.gameOver$.subscribe(gameOver => this.gameOver = gameOver);
   }
 
   selectPlayers() {
@@ -44,7 +46,7 @@ export class CircleTrackerComponent implements OnInit {
     this.updatePlayerPoints(column, circle);
     if (circle.once && circle.twice && !circle.closed) {
       circle.closed = true;
-      this.gameOver = this.checkIfColumnClosed(column, circle);
+      this.updateGameOver(this.checkIfColumnClosed(column, circle));
     }
     if (circle.once && !circle.twice) { circle.twice = true; }
     if (!circle.once) { circle.once = true; }
@@ -64,10 +66,10 @@ export class CircleTrackerComponent implements OnInit {
     }
   }
 
-  checkIfColumnClosed(column, circle) {
+  checkIfColumnClosed(column, circle): boolean {
     const result: Array<boolean> = [];
     column.circles.forEach(cir => {
-      (cir.twice && cir.closed) === true ? result.push(true) : this.gameOver = false;
+      (cir.twice && cir.closed) === true ? result.push(true) : this.updateGameOver(false);
     });
     circle.closed = true;
     return result.length === column.circles.length ? true : false;
@@ -93,6 +95,10 @@ export class CircleTrackerComponent implements OnInit {
       if (playerData.name === player.name) { playerData = player; }
     });
     this.playersService.updatePlayersData(this.playersData);
+  }
+
+  updateGameOver(value) {
+    this.playersService.updateGameOver(value);
   }
 
   constructor(private playersService: PlayersDataService) {}

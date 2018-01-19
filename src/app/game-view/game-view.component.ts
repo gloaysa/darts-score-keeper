@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { PlayersDataService } from "../../shared/playersdata.service";
 import { Player } from "../../models/player.model";
 
@@ -12,9 +12,10 @@ export class GameViewComponent {
   private playersData: Array<Player>;
   public player1: Player;
   public player2: Player;
+  public playing: boolean;
+  public numberOfRounds: number;
 
   changePlayers() {
-
     this.playersData.forEach(player => {
       if (player.player1) {
         player.player1 = !player.player1;
@@ -25,18 +26,39 @@ export class GameViewComponent {
         player.player2 = !player.player2;
         player.player1 = !player.player1;
         this.playersService.selectPlayers(player, undefined);
-
       }
     });
     this.playersService.updatePlayersData(this.playersData);
   }
 
-  constructor(private playersService: PlayersDataService) {}
+  nexTurn() {
+    const turn = this.numberOfRounds - 1;
+    this.playersService.updateNumberOfRounds(turn);
+    if (this.numberOfRounds === 0) {
+      this.playersService.updateGameOver(true);
+    }
+  }
 
-  ngOnInit() {
+  checkIfPlaying() {
+    this.playersService.playing$.subscribe(playing => this.playing = playing);
+    this.cdRef.detectChanges();
+  }
+
+  loadDataFromService() {
     this.playersService.sharePlayersData$.subscribe(data => this.playersData = data);
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
+    this.playersService.numberOfRounds$.subscribe(rounds => this.numberOfRounds = rounds);
+  }
+
+  constructor(private playersService: PlayersDataService, private cdRef: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.loadDataFromService();
+  }
+
+  ngAfterViewChecked() {
+    this.checkIfPlaying();
   }
 
 }

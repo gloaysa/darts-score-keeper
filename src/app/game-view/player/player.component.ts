@@ -62,5 +62,6 @@ export class PlayerComponent implements OnInit {
     this.playersService.sharePlayersData$.subscribe(data => this.playersData = data);
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
+    this.playersService.updatePlaying(false);
   }
 }

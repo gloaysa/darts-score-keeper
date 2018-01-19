@@ -12,11 +12,12 @@ import { Player } from '../../../models/player.model';
 })
 export class CircleTrackerComponent implements OnInit {
   public playersData;
-  private player1;
-  private player2;
+  private player1: Player;
+  private player2: Player;
   public column1: ColumnCircle;
   public column2: ColumnCircle;
-  private count;
+  private count: number;
+  public gameOver = false;
 
   fetchEvent() {
     this.playersService.sharePlayersData$.subscribe(data => {
@@ -40,19 +41,36 @@ export class CircleTrackerComponent implements OnInit {
 
 
   addPoints(column, circle) {
+    this.updatePlayerPoints(column, circle);
+    if (circle.once && circle.twice && !circle.closed) {
+      circle.closed = true;
+      this.gameOver = this.checkIfColumnClosed(column, circle);
+    }
+    if (circle.once && !circle.twice) { circle.twice = true; }
+    if (!circle.once) { circle.once = true; }
+  }
+
+  updatePlayerPoints(column, circle) {
     const opositeColumn = this.selectOpositeColumnOf(column);
     const player = this.selectPlayerFromColumn(column);
     if (circle.closed) {
-      opositeColumn.number.forEach(cir => {
+      opositeColumn.circles.forEach(cir => {
         if (cir.number === circle.number && !cir.closed) {
           column.points = column.points + circle.number;
           player.points = column.points;
         }
       });
+      // this.uploadPlayersData(player);
     }
-    if (circle.once && circle.twice && !circle.closed) { circle.closed = true; }
-    if (circle.once && !circle.twice) { circle.twice = true; }
-    if (!circle.once) { circle.once = true; }
+  }
+
+  checkIfColumnClosed(column, circle) {
+    const result: Array<boolean> = [];
+    column.circles.forEach(cir => {
+      (cir.twice && cir.closed) === true ? result.push(true) : this.gameOver = false;
+    });
+    circle.closed = true;
+    return result.length === column.circles.length ? true : false;
   }
 
   selectOpositeColumnOf(column): ColumnCircle {

@@ -1,12 +1,13 @@
 import { Circle } from "./circle.model";
+import { Player } from "./player.model";
 
 export class ColumnCircle {
-  number: Array<Circle>;
+  circles: Array<Circle>;
   points: number;
-  player: object;
+  player: Player;
 
   constructor(player) {
-    this.number = [
+    this.circles = [
       new Circle(15),
       new Circle(16),
       new Circle(17),

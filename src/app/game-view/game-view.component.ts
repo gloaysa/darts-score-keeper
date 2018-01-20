@@ -36,6 +36,7 @@ export class GameViewComponent {
     this.playersService.updateNumberOfRounds(turn);
     if (this.numberOfRounds === 0) {
       this.playersService.updateGameOver(true);
+      this.numberOfRounds = 20;
     }
   }
 

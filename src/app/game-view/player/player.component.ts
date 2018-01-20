@@ -13,6 +13,8 @@ export class PlayerComponent implements OnInit {
   public playersData: Array<Player>;
   private player1: Player;
   private player2: Player;
+  public numberOfRounds: number;
+
 
   disableAll() {
     return true;
@@ -56,12 +58,22 @@ export class PlayerComponent implements OnInit {
     this.playersService.updatePlayersData(this.playersData);
   }
 
+  updateNumberOfRounds(number) {
+    this.playersService.updateNumberOfRounds(number);
+  }
+
+  loadData() {
+    this.playersService.sharePlayersData$.subscribe(data => (this.playersData = data));
+    this.playersService.sharePlayer1$.subscribe(player => (this.player1 = player));
+    this.playersService.sharePlayer2$.subscribe(player => (this.player2 = player));
+    this.playersService.updatePlaying(false);
+    this.playersService.numberOfRounds$.subscribe(rounds => (this.numberOfRounds = rounds));
+  }
+
   constructor(private playersService: PlayersDataService) {}
 
   ngOnInit() {
-    this.playersService.sharePlayersData$.subscribe(data => this.playersData = data);
-    this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
-    this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
-    this.playersService.updatePlaying(false);
+    this.loadData();
+
   }
 }

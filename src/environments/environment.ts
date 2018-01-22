@@ -5,6 +5,8 @@
 
 export const environment = {
   production: false,
+  clientID: '213359763061-cu5n4f12a5en3ba2nmuktab5tk7gnsui.apps.googleusercontent.com',
+  clientSecret: "pLL8LBEFj1L-x3I9pByK8o4f",
   fileID: "12jGE_vFwYWrwlVcQt-dTqBx-KtxR3RFe9ooMRAxYK3k",
   APIkey: "AIzaSyAN6YQLjtsM1WsxC1_yzjxcmigmOu-jDGI",
   range: "A2%3AB20",

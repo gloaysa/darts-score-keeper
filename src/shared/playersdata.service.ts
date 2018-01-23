@@ -6,6 +6,7 @@ import { Player } from '../models/player.model';
 import 'rxjs/add/operator/map';
 import { environment } from '../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { GSheetsService } from './gsheets.service';
 
 @Injectable()
 export class PlayersDataService {
@@ -24,7 +25,7 @@ export class PlayersDataService {
   public numberOfRounds$ = this.numberOfRounds.asObservable();
 
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private GSheets = GSheetsService) {
     this.loadPlayersData().subscribe();
   }
 

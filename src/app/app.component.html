@@ -1,17 +1,24 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<div class="app" id="app" *ngIf="isSignedIn(); else login">
+  <button class="btn btn-block btn-danger" (click)="logOut()" >LOG OUT</button>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1>Welcome to {{ title }}!</h1>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-button [routerLink]="['./score']">Score</button>
+      <button mat-button [routerLink]="['./play']">Play</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <h1>Welcome to {{ title }}!</h1>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <button mat-button [routerLink]="['./score']" >Score</button>
-    <button mat-button [routerLink]="['./play']" >Play</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+  <mat-card>
+    <router-outlet></router-outlet>
+    <mat-card-footer>Hi, I'm the footer</mat-card-footer>
+  </mat-card>
+</div>
 
-<mat-card>
-  <router-outlet></router-outlet>
-  <mat-card-footer>Hi, I'm the footer</mat-card-footer>
-</mat-card>
+<ng-template #login>
+  <button class="btn btn-block btn-default" (click)="logIn()" >LOG IN</button>
+</ng-template>
+
+
 

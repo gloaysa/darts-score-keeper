@@ -14,7 +14,16 @@ import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PlayersDataService } from '../shared/playersdata.service';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../shared/user.service';
+import { GoogleApiModule, NG_GAPI_CONFIG, NgGapiClientConfig } from 'ng-gapi';
+import { environment } from '../environments/environment';
 
+
+const gapiClientConfig: NgGapiClientConfig = {
+  client_id: environment.clientID,
+  discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+  scope: ["https://www.googleapis.com/auth/spreadsheets"].join(" ")
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +40,13 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     FlexLayoutModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig
+    })
   ],
-  providers: [PlayersDataService],
+  providers: [PlayersDataService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

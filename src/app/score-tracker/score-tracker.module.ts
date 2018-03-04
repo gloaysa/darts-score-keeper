@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AppRoutingModule } from '../app-routing.module';
-import { GoogleDriveProvider } from '../spreadsheet.module';
-import { AppModule } from '../app.module';
-import { MaterialModule } from '../material.module';
+import { GoogleDriveProvider } from '../shared/spreadsheet.module';
+import { SharedModule } from '../shared/shared.module';
 import { ScoreTableComponent } from './score-table/score-table.component';
 import { ScoreTrackerComponent } from './score-tracker.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    AppRoutingModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [
     ScoreTrackerComponent,
@@ -24,4 +20,4 @@ import { ScoreTrackerComponent } from './score-tracker.component';
   ],
   providers: [GoogleDriveProvider]
 })
-export class ScoreTableModule { }
+export class ScoreTrackerModule { }

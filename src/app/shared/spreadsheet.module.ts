@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Player } from './models/player.model';
+import { Player } from '../models/player.model';
 
 @NgModule({
   imports: [

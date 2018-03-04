@@ -14,15 +14,15 @@ import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GoogleDriveProvider } from './spreadsheet.module';
 import { GameViewModule } from './game-view/game-view.module';
+import { ScoreTableModule } from './score-tracker/score-table.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ScoreTrackerComponent,
-    ScoreTableComponent
+    AppComponent
   ],
   imports: [
     GameViewModule,
+    ScoreTableModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

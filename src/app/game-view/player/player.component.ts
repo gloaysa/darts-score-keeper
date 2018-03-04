@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PlayersDataService } from '../../shared/playersdata.service';
+import { PlayersService } from '../../shared/players.service';
 import { Player } from '../../models/player.model';
 import { async } from '@angular/core/testing';
 
@@ -57,8 +57,8 @@ export class PlayerComponent implements OnInit {
     this.playersService.updatePlayersData(this.playersData);
   }
 
-  constructor(private playersService: PlayersDataService) {
-    this.playersService.sharePlayersData$.subscribe(data => this.playersData = JSON.parse(data));
+  constructor(private playersService: PlayersService) {
+    this.playersService.sharePlayersData$.subscribe(data => this.players = JSON.parse(data));
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
    }

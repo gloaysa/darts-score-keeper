@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { GoogleDriveProvider } from '../spreadsheet.module';
 import { Http, Response } from '@angular/http';
-import { Player } from '../models/player.model';
 import 'rxjs/add/operator/map';
+
 import { environment } from '../../environments/environment';
+import { GoogleDriveProvider } from '../spreadsheet.module';
+import { Player } from '../models/player.model';
 
 @Injectable()
-export class PlayersDataService {
+export class PlayersService {
   private player1 = new Subject<string>();
   private player2 = new Subject<string>();
   private playersData = new Subject<string>();
@@ -30,21 +31,26 @@ export class PlayersDataService {
   }
 
   loadPlayersData() {
-    return this.http.get(environment.sheetURL).map(res => {
-      const data = res.json().values;
-      const returnArray = [];
-      if (data && data.length > 0) {
-        data.forEach((entry: Array<string>, index: number) => {
-          let obj: Player;
-          const pos = index + 1;
-          const name = entry[0];
-          const points = entry[1];
-          obj = new Player(pos, name, points);
-          returnArray.push(obj);
+    return this.http.get(environment.sheetURL).map(table => {
+      const tableLines = table.json().values;
+      const players: Player[] = [];
+      if (tableLines && tableLines.length > 0) {
+        tableLines.forEach((line: String[], index: number) => {
+          const player: Player = this.createPlayerObject(line, index);
+          players.push(player);
         });
       }
-      this.playersData.next(JSON.stringify(returnArray));
+      this.playersData.next(JSON.stringify(players));
     });
+  }
+
+  createPlayerObject(line: String[], index: number) {
+    let player: Player;
+    const pos: number = index + 1;
+    const name: String = line[0];
+    const points: String = line[1];
+    player = new Player(pos, name, points);
+    return player;
   }
 
 }

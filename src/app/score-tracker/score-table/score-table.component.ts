@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 
 import { MatTableDataSource } from "@angular/material";
-import { PlayersDataService } from "../../shared/playersdata.service";
+import { PlayersService } from "../../shared/players.service";
 import { Player } from "../../models/player.model";
 
 @Component({
   selector: "app-score-table",
   templateUrl: "./score-table.component.html",
   styleUrls: ["./score-table.component.css"],
-  providers: [PlayersDataService]
+  providers: [PlayersService]
 })
 export class ScoreTableComponent implements OnInit {
   private results;
@@ -32,7 +32,7 @@ export class ScoreTableComponent implements OnInit {
     return arr;
   }
 
-  constructor(private playersService: PlayersDataService) {
+  constructor(private playersService: PlayersService) {
     this.playersService.loadPlayersData().subscribe();
     this.playersService.sharePlayersData$.subscribe(data => {
       this.results = JSON.parse(data);

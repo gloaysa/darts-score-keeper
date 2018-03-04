@@ -1,4 +1,5 @@
-<div fxLayout="column" fxLayoutGap="5px" class="player-column" *ngFor="let circle of circles; let i = index">
+PLAYER: {{player1?.name}}
+<div fxLayout="column" fxLayoutGap="5px" class="player-column" *ngFor="let circle of player1?.circles; let i = index">
   <div fxFlex>
     <ng-container *ngIf="circle.number < 21; else icon">
       <button class="mat-fab" (click)="addPoints(i)" [ngClass]="selectState(i)">{{ circle.number }}</button>

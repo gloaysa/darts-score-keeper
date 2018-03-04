@@ -5,7 +5,6 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
-import { GoogleDriveProvider } from '../spreadsheet.module';
 import { Player } from '../models/player.model';
 
 @Injectable()
@@ -13,14 +12,11 @@ export class PlayersService {
   private player1 = new Subject<Player>();
   private player2 = new Subject<Player>();
   private playersData = new Subject<Player[]>();
-
   public sharePlayer1$ = this.player1.asObservable();
   public sharePlayer2$ = this.player2.asObservable();
   public sharePlayersData$ = this.playersData.asObservable();
 
-  constructor(private http: Http) {
-    this.loadPlayersData();
-  }
+  constructor(private http: Http) {}
 
   selectPlayers(player1: Player, player2: Player) {
     player1 ? this.player1.next(player1) : this.player2.next(player2);
@@ -44,7 +40,7 @@ export class PlayersService {
     });
   }
 
-  createPlayerObject(line: String[], index: number) {
+  private createPlayerObject(line: String[], index: number) {
     let player: Player;
     const pos: number = index + 1;
     const name: String = line[0];
@@ -52,5 +48,5 @@ export class PlayersService {
     player = new Player(pos, name, points);
     return player;
   }
-
+  
 }

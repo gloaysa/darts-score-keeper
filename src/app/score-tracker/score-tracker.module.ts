@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GoogleDriveProvider } from '../shared/spreadsheet.module';
 import { SharedModule } from '../shared/shared.module';
 import { ScoreTableComponent } from './score-table/score-table.component';
 import { ScoreTrackerComponent } from './score-tracker.component';
@@ -17,7 +16,6 @@ import { ScoreTrackerComponent } from './score-tracker.component';
   exports: [
     ScoreTrackerComponent,
     ScoreTableComponent
-  ],
-  providers: [GoogleDriveProvider]
+  ]
 })
 export class ScoreTrackerModule { }

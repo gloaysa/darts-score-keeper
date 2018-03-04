@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { GoogleDriveProvider } from "../spreadsheet.module";
+import { GoogleDriveProvider } from "../shared/spreadsheet.module";
 import { PlayersService } from "../shared/players.service";
 import { Player } from "../models/player.model";
 
@@ -7,7 +7,7 @@ import { Player } from "../models/player.model";
   selector: "app-game-view",
   templateUrl: "./game-view.component.html",
   styleUrls: ["./game-view.component.css"],
-  providers: [PlayersService]
+  providers: []
 })
 export class GameViewComponent implements OnInit {
   public player1: Player;

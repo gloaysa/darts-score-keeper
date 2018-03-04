@@ -14,7 +14,7 @@ import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GoogleDriveProvider } from './spreadsheet.module';
 import { GameViewModule } from './game-view/game-view.module';
-import { ScoreTableModule } from './score-tracker/score-table.module';
+import { ScoreTableModule } from './score-tracker/score-tracker.module';
 
 @NgModule({
   declarations: [

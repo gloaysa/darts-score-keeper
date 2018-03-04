@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Circle } from '../../models/circle.model';
 
 @Component({
   selector: "app-circle-tracker",
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CircleTrackerComponent implements OnInit {
   count = 0;
-  circles = [];
+  circles: Circle[] = [];
 
   addPoints(index) {
     const circle = this.circles[index];
@@ -30,7 +31,7 @@ export class CircleTrackerComponent implements OnInit {
     const self = this;
     function createCircles() {
       for (let i = 15; i < 22; i++) {
-        const circle = { number: i, once: false, twice: false, closed: false, player: 0 };
+        const circle = new Circle(i, 0);
         self.circles.push(circle);
       }
     }

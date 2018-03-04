@@ -1,3 +1,5 @@
+import { Circle } from "./circle.model";
+
 export class Player {
     position: number;
     name: string;
@@ -6,6 +8,7 @@ export class Player {
     playing: boolean;
     player1: boolean;
     player2: boolean;
+    circles: Circle[];
     constructor(pos, name, points) {
         this.position = pos;
         this.name = name;

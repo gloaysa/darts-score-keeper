@@ -1,4 +1,4 @@
-export class playersData {
+export class Player {
     position: number;
     name: string;
     points: number;

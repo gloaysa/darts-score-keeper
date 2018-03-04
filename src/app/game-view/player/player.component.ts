@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayersDataService } from '../../shared/playersdata.service';
-import { playersData } from '../../models/playersData';
+import { playersData } from '../../models/player.model';
 import { async } from '@angular/core/testing';
 
 @Component({

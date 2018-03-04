@@ -7,10 +7,9 @@ import { Player } from "../../models/player.model";
 @Component({
   selector: "app-score-table",
   templateUrl: "./score-table.component.html",
-  styleUrls: ["./score-table.component.css"],
-  providers: [PlayersService]
+  styleUrls: ["./score-table.component.css"]
 })
-export class ScoreTableComponent implements OnInit {
+export class ScoreTableComponent {
   private results;
 
   displayedColumns = ["position", "player", "points"];
@@ -41,5 +40,4 @@ export class ScoreTableComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
 }

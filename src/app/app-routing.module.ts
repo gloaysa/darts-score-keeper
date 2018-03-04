@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     component: ScoreTrackerComponent
   },
   {
-    path: "play",
+    path: "",
     component: GameViewComponent,
     children: [
       {

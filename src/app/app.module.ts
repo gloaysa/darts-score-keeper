@@ -13,17 +13,16 @@ import { CircleTrackerComponent } from "./game-view/circle-tracker/circle-tracke
 import { PlayerComponent } from './game-view/player/player.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GoogleDriveProvider } from './spreadsheet.module';
+import { GameViewModule } from './game-view/game-view.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScoreTrackerComponent,
-    ScoreTableComponent,
-    GameViewComponent,
-    CircleTrackerComponent,
-    PlayerComponent
+    ScoreTableComponent
   ],
   imports: [
+    GameViewModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

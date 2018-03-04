@@ -10,9 +10,9 @@ import { Player } from '../models/player.model';
 
 @Injectable()
 export class PlayersService {
-  private player1 = new Subject<string>();
-  private player2 = new Subject<string>();
-  private playersData = new Subject<string>();
+  private player1 = new Subject<Player>();
+  private player2 = new Subject<Player>();
+  private playersData = new Subject<Player[]>();
 
   public sharePlayer1$ = this.player1.asObservable();
   public sharePlayer2$ = this.player2.asObservable();
@@ -22,12 +22,12 @@ export class PlayersService {
     this.loadPlayersData();
   }
 
-  selectPlayers(player1, player2) {
+  selectPlayers(player1: Player, player2: Player) {
     player1 ? this.player1.next(player1) : this.player2.next(player2);
   }
 
   updatePlayersData(newData: Array<Player>) {
-    this.playersData.next(JSON.stringify(newData));
+    this.playersData.next(newData);
   }
 
   loadPlayersData() {
@@ -40,7 +40,7 @@ export class PlayersService {
           players.push(player);
         });
       }
-      this.playersData.next(JSON.stringify(players));
+      this.playersData.next(players);
     });
   }
 

@@ -9,18 +9,21 @@ import { Player } from "../models/player.model";
   styleUrls: ["./game-view.component.css"],
   providers: [PlayersService]
 })
-export class GameViewComponent {
-  public player1 = "Player 1";
-  public player2 = "Player 2";
+export class GameViewComponent implements OnInit {
+  public player1: Player;
+  public player2: Player;
 
   changePlayers() {
     const player1 = this.player1;
-    this.player1 = this.player2;
-    this.player2 = player1;
+    this.playersService.selectPlayers(this.player2, undefined);
+    this.playersService.selectPlayers(undefined, player1);
   }
 
   constructor(private playersService: PlayersService) {
     this.playersService.loadPlayersData().subscribe();
+  }
+
+  ngOnInit() {
     this.playersService.sharePlayer1$.subscribe(player => this.player1 = player);
     this.playersService.sharePlayer2$.subscribe(player => this.player2 = player);
   }

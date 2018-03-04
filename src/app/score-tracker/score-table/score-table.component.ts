@@ -35,7 +35,7 @@ export class ScoreTableComponent implements OnInit {
   constructor(private playersService: PlayersService) {
     this.playersService.loadPlayersData().subscribe();
     this.playersService.sharePlayersData$.subscribe(data => {
-      this.results = JSON.parse(data);
+      this.results = data;
       this.dataSource = new MatTableDataSource();
       this.dataSource.data = this.orderByPoints(this.results);
     });

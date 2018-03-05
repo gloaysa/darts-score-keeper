@@ -3,10 +3,10 @@
     POINTS: {{ player1?.points }}
     <div class="player-column" *ngFor="let circle of player1?.circles; let i = index">
       <ng-container *ngIf="circle.number < 21; else icon">
-        <button class="mat-fab" (click)="addPoints(player1, i)" [ngClass]="selectState(player1, i)">{{ circle.number }}</button>
+        <button class="mat-fab" [disabled]="circle.disabled" (click)="addPoints(player1, i)" [ngClass]="selectState(player1, i)">{{ circle.number }}</button>
       </ng-container>
       <ng-template #icon>
-        <button class="mat-fab" (click)="addPoints(player1, i)" [ngClass]="selectState(player1, i)">
+        <button class="mat-fab" [disabled]="circle.disabled" (click)="addPoints(player1, i)" [ngClass]="selectState(player1, i)">
           <i class="material-icons">track_changes</i>
         </button>
       </ng-template>
@@ -17,10 +17,10 @@
     POINTS: {{ player2?.points }}
     <div class="player-column" *ngFor="let circle of player2?.circles; let i = index">
       <ng-container *ngIf="circle.number < 21; else icon">
-        <button class="mat-fab" (click)="addPoints(player2, i)" [ngClass]="selectState(player2, i)">{{ circle.number }}</button>
+        <button class="mat-fab" [disabled]="circle.disabled" (click)="addPoints(player2, i)" [ngClass]="selectState(player2, i)">{{ circle.number }}</button>
       </ng-container>
       <ng-template #icon>
-        <button class="mat-fab" (click)="addPoints(player2, i)" [ngClass]="selectState(player2, i)">
+        <button class="mat-fab" [disabled]="circle.disabled" (click)="addPoints(player2, i)" [ngClass]="selectState(player2, i)">
           <i class="material-icons">track_changes</i>
         </button>
       </ng-template>

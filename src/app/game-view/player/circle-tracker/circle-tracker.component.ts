@@ -12,19 +12,21 @@ export class CircleTrackerComponent implements OnChanges {
 
   @Input() player1: Player;
   @Input() player2: Player;
-  count = 0;
-  circles: Circle[];
 
-  addPoints(player, index) {
+  addPoints(player: Player, index) {
     const circle = player.circles[index];
-    if (circle.closed) {
-      this.count = this.count + circle.number;
-    }
+    const enemy: Player = player === this.player1 ? this.player2 : this.player1;
+    const enemyCircle: Circle = enemy.circles[index];
+
+    if (circle.closed && !enemyCircle.closed) { player.points = player.points + circle.number; }
+    this.changeCircleStatus(circle, player, index);
+  }
+
+  changeCircleStatus(circle, player, index) {
     if (circle.once && circle.twice && !circle.closed) { player.circles[index].closed = true; }
     if (circle.once && !circle.twice) { player.circles[index].twice = true; }
     if (!circle.once) { player.circles[index].once = true; }
   }
-
   selectState(player, index) {
     if (player.circles[index].closed) { return "closed"; }
     if (player.circles[index].twice) { return "twice"; }

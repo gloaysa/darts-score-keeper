@@ -1,7 +1,7 @@
-<div class="col col-sm-6">
-  POINTS: {{ player1?.points }}
-  <div fxLayout="column" fxLayoutGap="5px" class="player-column" *ngFor="let circle of player1?.circles; let i = index">
-    <div fxFlex>
+<div class="row">
+  <div class="col col-sm-6">
+    POINTS: {{ player1?.points }}
+    <div class="player-column" *ngFor="let circle of player1?.circles; let i = index">
       <ng-container *ngIf="circle.number < 21; else icon">
         <button class="mat-fab" (click)="addPoints(player1, i)" [ngClass]="selectState(player1, i)">{{ circle.number }}</button>
       </ng-container>
@@ -12,12 +12,10 @@
       </ng-template>
     </div>
   </div>
-</div>
 
-<div class="col col-sm-6">
-   POINTS: {{ player2?.points }}
-  <div fxLayout="column" fxLayoutGap="5px" class="player-column" *ngFor="let circle of player2?.circles; let i = index">
-    <div fxFlex>
+  <div class="col col-sm-6">
+    POINTS: {{ player2?.points }}
+    <div class="player-column" *ngFor="let circle of player2?.circles; let i = index">
       <ng-container *ngIf="circle.number < 21; else icon">
         <button class="mat-fab" (click)="addPoints(player2, i)" [ngClass]="selectState(player2, i)">{{ circle.number }}</button>
       </ng-container>

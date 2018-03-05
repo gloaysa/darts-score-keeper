@@ -13,7 +13,7 @@ export class CircleTrackerComponent implements OnChanges {
   @Input() player1: Player;
   @Input() player2: Player;
 
-  addPoints(player: Player, index) {
+  private addPoints(player: Player, index) {
     const circle = player.circles[index];
     const enemy: Player = player === this.player1 ? this.player2 : this.player1;
     const enemyCircle: Circle = enemy.circles[index];
@@ -22,18 +22,18 @@ export class CircleTrackerComponent implements OnChanges {
     this.changeCircleStatus(circle, player, index);
   }
 
-  changeCircleStatus(circle, player, index) {
+  private changeCircleStatus(circle, player, index) {
     if (circle.once && circle.twice && !circle.closed) { player.circles[index].closed = true; }
     if (circle.once && !circle.twice) { player.circles[index].twice = true; }
     if (!circle.once) { player.circles[index].once = true; }
   }
-  selectState(player, index) {
+  private selectState(player, index) {
     if (player.circles[index].closed) { return "closed"; }
     if (player.circles[index].twice) { return "twice"; }
     if (player.circles[index].once) { return "once"; }
   }
 
-  selectPlayer(player) {
+  private selectPlayer(player) {
     if (this.player1 === player) { return this.player1 }
     if (this.player2 === player) { return this.player2 }
   }

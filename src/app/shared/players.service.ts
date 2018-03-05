@@ -31,7 +31,7 @@ export class PlayersService {
       const tableLines = table.json().values;
       const players: Player[] = [];
       if (tableLines && tableLines.length > 0) {
-        tableLines.forEach((line: String[], index: number) => {
+        tableLines.forEach((line: string[], index: number) => {
           const player: Player = this.createPlayerObject(line, index);
           players.push(player);
         });
@@ -40,11 +40,11 @@ export class PlayersService {
     });
   }
 
-  private createPlayerObject(line: String[], index: number) {
+  private createPlayerObject(line: string[], index: number) {
     let player: Player;
     const pos: number = index + 1;
-    const name: String = line[0];
-    const points: String = line[1];
+    const name: string = line[0];
+    const points: number = parseInt(line[1]);
     player = new Player(pos, name, points);
     return player;
   }

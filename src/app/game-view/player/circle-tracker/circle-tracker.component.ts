@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { Circle } from '../../../models/circle.model';
-import { PlayersService } from '../../../shared/players.service';
 import { Player } from '../../../models/player.model';
 
 @Component({
@@ -9,45 +8,50 @@ import { Player } from '../../../models/player.model';
   templateUrl: "./circle-tracker.component.html",
   styleUrls: ["./circle-tracker.component.css"]
 })
-export class CircleTrackerComponent implements OnInit {
-  count = 0;
-  player1: Player;
-  player2: Player;
-  circles: Circle[] = [];
+export class CircleTrackerComponent implements OnChanges {
 
-  addPoints(index) {
-    const circle = this.circles[index];
+  @Input() player1: Player;
+  @Input() player2: Player;
+  count = 0;
+  circles: Circle[];
+
+  addPoints(player, index) {
+    const circle = player.circles[index];
     if (circle.closed) {
       this.count = this.count + circle.number;
     }
-    if (circle.once && circle.twice && !circle.closed) { this.circles[index].closed = true; }
-    if (circle.once && !circle.twice) { this.circles[index].twice = true; }
-    if (!circle.once) { this.circles[index].once = true; }
+    if (circle.once && circle.twice && !circle.closed) { player.circles[index].closed = true; }
+    if (circle.once && !circle.twice) { player.circles[index].twice = true; }
+    if (!circle.once) { player.circles[index].once = true; }
   }
 
-  selectState(index) {
-    if (this.player1.circles[index].closed) { return "closed"; }
-    if (this.player1.circles[index].twice) { return "twice"; }
-    if (this.player1.circles[index].once) { return "once"; }
+  selectState(player, index) {
+    if (player.circles[index].closed) { return "closed"; }
+    if (player.circles[index].twice) { return "twice"; }
+    if (player.circles[index].once) { return "once"; }
+  }
+
+  selectPlayer(player) {
+    if (this.player1 === player) { return this.player1 }
+    if (this.player2 === player) { return this.player2 }
   }
 
   private createCircles(player: Player) {
-    for (let i = 15; i < 22; i++) {
-      const circle = new Circle(i, 0);
-      player.circles.push(circle);
+    if (player !== undefined) {
+      for (let i = 15; i < 22; i++) {
+        const circle = new Circle(i, 0);
+        player.circles.push(circle);
+      }
     }
+    
   }
 
-  constructor(private playersService: PlayersService) {}
-
-  ngOnInit() {
-    this.playersService.sharePlayer1$.subscribe(player => {
-      this.player1 = player;
-      this.createCircles(this.player1)
-    });
-    this.playersService.sharePlayer2$.subscribe(player => {
-      this.player2 = player;
-      this.createCircles(this.player2);
-    });
+  ngOnChanges(change) {
+    if (change.player1) {
+      this.createCircles(this.selectPlayer(change.player1.currentValue));
+    }
+    if (change.player2) {
+      this.createCircles(this.selectPlayer(change.player2.currentValue));
+    }
   }
 }

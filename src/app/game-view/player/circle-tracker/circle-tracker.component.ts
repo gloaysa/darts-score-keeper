@@ -13,6 +13,8 @@ export class CircleTrackerComponent implements OnChanges {
   @Input() player1: Player;
   @Input() player2: Player;
   circlesLeft: number = 7;
+  roundsLeft: number = 20;
+  gameStarted: boolean = false;
 
   ngOnChanges(change) {
     if (change.player1) {
@@ -24,12 +26,16 @@ export class CircleTrackerComponent implements OnChanges {
   }
 
   private createCircles(player: Player) {
-    if (player !== undefined) {
+    if (player !== undefined && player.circles.length === 0) {
       for (let i = 15; i < 22; i++) {
         const circle = new Circle(i, 0);
         player.circles.push(circle);
       }
     }
+  }
+
+  private startGame() {
+    this.gameStarted = true;
   }
   private addPoints(player: Player, index) {
     const circle = player.circles[index];
@@ -64,6 +70,10 @@ export class CircleTrackerComponent implements OnChanges {
     this.circlesLeft--;
   }
 
+  private reduceRoundsLeft() {
+    this.roundsLeft--;
+  }
+
   private bothCirclesClosed(circle1: Circle, circle2: Circle) {
     return circle1.closed && circle2.closed ? true : false;
   }
@@ -71,6 +81,12 @@ export class CircleTrackerComponent implements OnChanges {
   private disableCircle(circle1: Circle, circle2: Circle) {
     circle1.disabled = true;
     circle2.disabled = true;
+  }
+
+  private gameOver() {
+    if (!this.gameStarted || this.circlesLeft === 0 || this.roundsLeft === 0) {
+      return true;
+    }
   }
 
 }

@@ -6,11 +6,6 @@
          > {{ player.name}} </button>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <button mat-button class="btn btn-block" [hidden]="twoPlayersSelected()" [routerLink]="['./game']">Start Playing</button>
-    </div>
-</div>
 
 <div [hidden]="twoPlayersSelected()">
     <app-circle-tracker [player1]="player1" [player2]="player2"></app-circle-tracker>

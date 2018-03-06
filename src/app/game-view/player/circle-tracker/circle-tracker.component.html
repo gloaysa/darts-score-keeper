@@ -4,7 +4,7 @@
     <button mat-button class="btn btn-block" [hidden]="!gameStarted || gameOver()" (click)="reduceRoundsLeft()">Round number {{ roundsLeft }}</button>
   </div>
 </div>
-
+{{ minutes }} : {{ seconds }}
 <div class="row">
   <div class="col col-sm-6">
     POINTS: {{ player1?.points }}

@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { SimpleTimer } from 'ng2-simple-timer';
 
 import { Circle } from '../../../models/circle.model';
 import { Player } from '../../../models/player.model';
@@ -12,9 +13,14 @@ export class CircleTrackerComponent implements OnChanges {
 
   @Input() player1: Player;
   @Input() player2: Player;
-  circlesLeft: number = 7;
-  roundsLeft: number = 20;
+  circlesLeft: number;
+  roundsLeft: number;
   gameStarted: boolean = false;
+  seconds: number;
+  minutes: number;
+  timerId: string;
+
+  constructor(private st: SimpleTimer) {}
 
   ngOnChanges(change) {
     if (change.player1) {
@@ -35,7 +41,22 @@ export class CircleTrackerComponent implements OnChanges {
   }
 
   private startGame() {
+    this.circlesLeft = 7;
+    this.roundsLeft = 20;
+    this.minutes = 0;
+    this.seconds = 0;
     this.gameStarted = true;
+    this.st.newTimer('playing', 1);
+    this.timerId = this.st.subscribe('playing', () => this.addTime())
+  }
+
+  private addTime() {
+    if (this.seconds < 59) {
+      this.seconds++;
+    } else {
+      this.minutes++;
+      this.seconds = 0;
+    }
   }
   private addPoints(player: Player, index) {
     const circle = player.circles[index];

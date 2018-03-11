@@ -15,7 +15,7 @@ export class CircleTrackerComponent implements OnChanges {
   @Input() player2: Player;
   circlesLeft: number;
   roundsLeft: number;
-  gameStarted: boolean = false;
+  gameStarted = false;
   seconds: number;
   minutes: number;
   timerId: string;
@@ -47,7 +47,7 @@ export class CircleTrackerComponent implements OnChanges {
     this.seconds = 0;
     this.gameStarted = true;
     this.st.newTimer('playing', 1);
-    this.timerId = this.st.subscribe('playing', () => this.addTime())
+    this.timerId = this.st.subscribe('playing', () => this.addTime());
   }
 
   private addTime() {
@@ -68,7 +68,7 @@ export class CircleTrackerComponent implements OnChanges {
     if (this.bothCirclesClosed(circle, enemyCircle)) {
       this.reduceCirclesLeft();
       this.disableCircle(circle, enemyCircle);
-    };
+    }
   }
 
   private changeCircleStatus(circle: Circle, player: Player) {
@@ -83,8 +83,8 @@ export class CircleTrackerComponent implements OnChanges {
   }
 
   private selectPlayer(player: Player) {
-    if (this.player1 === player) { return this.player1 }
-    if (this.player2 === player) { return this.player2 }
+    if (this.player1 === player) { return this.player1; }
+    if (this.player2 === player) { return this.player2; }
   }
 
   private reduceCirclesLeft() {
